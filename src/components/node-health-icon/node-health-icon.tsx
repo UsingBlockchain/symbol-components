@@ -13,40 +13,80 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NetworkType } from 'symbol-sdk/dist/src/model/network/NetworkType'
-import { RepositoryFactoryHttp } from 'symbol-sdk/dist/src/infrastructure/RepositoryFactoryHttp'
-import { Component, Prop, h, Host } from '@stencil/core';
+import { Component, Prop, h, Host, EventEmitter, Listen, Element, State, Event, getAssetPath } from '@stencil/core'
+
+// internal dependencies
+import { NodeProvider } from '../../providers/NodeProvider'
+import { NodeHealthStatus } from './NodeHealthStatus'
 
 @Component({
-  tag: 'node-health-icon',
+  tag: 'symbol-node-health-icon',
   styleUrl: 'node-health-icon.css',
-  shadow: true
+  shadow: false,
+  assetsDirs: ['resources']
 })
 export class NodeHealthIcon {
+  @Element() el: HTMLElement;
+
   /**
    * The node url (REST gateway)
    */
-  @Prop() nodeUrl?: string
+  @Prop() nodeUrl: string
 
   /**
-   * The network type
+   * The node health status
    */
-  @Prop() networkType?: NetworkType
+  @State() status: NodeHealthStatus;
 
   /**
-   * The network generation hash
+   * Emits the node health
    */
-  @Prop() generationHash?: string
+  @Event({
+    eventName: 'fetched',
+    cancelable: false
+  }) fetched: EventEmitter<NodeHealthStatus>;
 
-  constructor() { console.log('constructed') }
-
+  /// region component lifecycle
   /**
    * Read node health endpoint
    */
   componentWillLoad() {
-    if (this.nodeUrl && this.nodeUrl.length) {
-      return this.factory.createNodeRepository().getNodeHealth()
+    if (!this.nodeUrl || !this.nodeUrl.length) {
+      return
     }
+
+    if (!('fetch' in window)) {
+      return
+    }
+
+    const provider = new NodeProvider(this.nodeUrl)
+    provider.getNodeHealth().then(
+      (json) => this.fetched.emit(json as NodeHealthStatus)
+    )
+  }
+  /// end-region component lifecycle
+
+  /// region event handlers
+  /**
+   * Update state when `fetched` is emitted
+   */
+  @Listen('fetched')
+  fetchedHandler(status: any) {
+    this.status = status.detail as NodeHealthStatus
+  }
+  /// end-region event handlers
+
+  /// region render methods
+  renderIcon(status: NodeHealthStatus) {
+    if (status && status.apiNode === 'up' && status.db === 'up') {
+      return <img src={getAssetPath('./resources/up.png')}
+                  title="Connected"
+                  class="symbol-node-health-icon" />
+    }
+
+    return <img src={getAssetPath('./resources/down.png')}
+                title="Disconnected"
+                class="symbol-node-health-icon" />
   }
 
   /**
@@ -54,20 +94,8 @@ export class NodeHealthIcon {
    */
   render() {
     return <Host>
-      <div>Hello, World!</div>
+      {this.renderIcon(this.status)}
     </Host>;
   }
-
-  /// region private api
-  /**
-   * Getter for the sdk's repository factory
-   */
-  private get factory(): RepositoryFactoryHttp {
-    return new RepositoryFactoryHttp(
-      this.nodeUrl,
-      this.networkType,
-      this.generationHash
-    )
-  }
-  /// end-region private api
+  /// end-region render methods
 }

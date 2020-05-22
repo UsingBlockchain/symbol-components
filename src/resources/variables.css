@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-present Grégory Saive for NEM
+ * Copyright 2020-present Grégory Saive All rights reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,4 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './components'
+:root {
+--xym-primary-color: #5200c6;
+--xym-secondary-color: #44004e;
+--xym-red-color: red;
+--xym-pink-color: #f0f;
+--xym-blue-color: #00c8ff;
+--xym-green-color: #33dd50;
+--xym-orange-color: #ff9600;
+}

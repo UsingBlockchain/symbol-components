@@ -13,20 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { newSpecPage } from '@stencil/core/testing';
-import { NodeHealthIcon } from './node-health-icon';
 
-describe('NodeHealthIcon component should', () => {
-  it('render', async () => {
-    const {root} = await newSpecPage({
-      components: [NodeHealthIcon],
-      html: '<symbol-node-health-icon></symbol-node-health-icon>'
-    });
-
-    expect(root).toEqualHtml(`
-      <symbol-node-health-icon>
-        <img src="/resources/down.png" title="Disconnected" class="symbol-node-health-icon" />
-      </symbol-node-health-icon>
-    `);
-  });
-});
+module.exports = {
+  preset: "@stencil/core/testing"
+}

@@ -16,32 +16,39 @@
 import { Config } from '@stencil/core';
 import polyfills from 'rollup-plugin-node-polyfills';
 
-export const config: Config = {
+export const create: () => Config = () => ({
   /// region packaging
   preamble: 'Built for Symbol',
   namespace: 'symbol-components',
-  taskQueue: 'async',
+  //taskQueue: 'async',
   /// end-region packaging
 
   /// region compiler/transpiler
   buildEs5: false,
-  enableCache: true,
-  srcDir: 'src',
+  shadowDomShim: false,
+  enableCache: false,
   minifyJs: false,
   minifyCss: true,
+  srcIndexHtml: "src/index.html",
+  extras: {
+    appendChildSlotFix: true,
+    slotChildNodesFix: true
+  },
   /// end-region compiler/transpiler
 
   /// region rollup plugins
   commonjs: {
     namedExports: {
       'punycode': ['toASCII'],
-      'symbol-sdk': ['RepositoryFactoryHttp'],
+      'events': ['EventEmitter'],
+      'node_modules/buffer/index.js': ['isBuffer'],
       'process': ['nextTick'],
-      'events': ['EventEmitter']
+      'symbol-openapi-typescript-node-client': ['NodeRoutesApi'],
+      './node_modules/request/index.js': ['get']
     }
   },
   nodeResolve: {
-    preferBuiltins: true
+    preferBuiltins: true,
   },
   rollupPlugins: {
     before: [],
@@ -52,18 +59,28 @@ export const config: Config = {
   /// end-region rollup plugins
 
   /// region distribution
+  globalStyle: 'src/resources/variables.css',
+  bundles: [
+    {components: ['symbol-node-health-icon']}
+  ]
   outputTargets: [
     {
       type: 'dist',
       esmLoaderPath: '../loader'
     },
+    { type: 'dist-lazy', dir: 'dist/lazy' },
     {
       type: 'docs-readme'
     },
     {
       type: 'www',
-      serviceWorker: null
+      serviceWorker: null,
+      copy: [
+        { src: 'resources/icons', dest: 'assets/icons' }
+      ]
     }
-  ],
+  ]
   /// end-region distribution
-};
+});
+
+export const config = create();

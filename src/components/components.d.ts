@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { NodeHealthStatus, } from "./components/node-health-icon/NodeHealthStatus";
 export namespace Components {
     interface SymbolNodeHealthIcon {
         /**
@@ -34,7 +33,7 @@ declare namespace LocalJSX {
         /**
           * Emits the node health
          */
-        "onFetched"?: (event: CustomEvent<NodeHealthStatus>) => void;
+        "onFetched"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "symbol-node-health-icon": SymbolNodeHealthIcon;

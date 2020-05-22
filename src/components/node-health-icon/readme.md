@@ -1,6 +1,6 @@
 # node-health-icon
 
-The `<node-health-icon></node-health-icon>` component is a Symbol component that provides **a network node health status display**.
+The `<symbol-node-health-icon></symbol-node-health-icon>` component is a Symbol component that provides **a network node health status display**.
 
 ## License
 
@@ -13,11 +13,16 @@ Licensed under the [Apache License 2.0](LICENSE)
 
 ## Properties
 
-| Property         | Attribute         | Description                 | Type                                                                                          | Default     |
-| ---------------- | ----------------- | --------------------------- | --------------------------------------------------------------------------------------------- | ----------- |
-| `generationHash` | `generation-hash` | The network generation hash | `string`                                                                                      | `undefined` |
-| `networkType`    | `network-type`    | The network type            | `NetworkType.MAIN_NET \| NetworkType.MIJIN \| NetworkType.MIJIN_TEST \| NetworkType.TEST_NET` | `undefined` |
-| `nodeUrl`        | `node-url`        | The node url (REST gateway) | `string`                                                                                      | `undefined` |
+| Property  | Attribute  | Description                 | Type     | Default     |
+| --------- | ---------- | --------------------------- | -------- | ----------- |
+| `nodeUrl` | `node-url` | The node url (REST gateway) | `string` | `undefined` |
+
+
+## Events
+
+| Event     | Description           | Type                            |
+| --------- | --------------------- | ------------------------------- |
+| `fetched` | Emits the node health | `CustomEvent<NodeHealthStatus>` |
 
 
 ----------------------------------------------

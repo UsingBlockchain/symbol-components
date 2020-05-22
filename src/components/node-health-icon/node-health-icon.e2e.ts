@@ -16,31 +16,27 @@
 import { newSpecPage, newE2EPage } from '@stencil/core/testing';
 import { NodeHealthIcon } from './node-health-icon';
 
-describe('node-health-icon spec should', () => {
+describe('NodeHealthIcon component should', () => {
   it('render with values', async () => {
     const {root} = await newSpecPage({
       components: [NodeHealthIcon],
-      html: `<node-health-icon node-url="http://localhost:3000"></node-health-icon>`
+      html: `<symbol-node-health-icon node-url="http://localhost:3000"></symbol-node-health-icon>`
     });
 
     expect(root).toEqualHtml(`
-      <node-health-icon node-url="http://localhost:3000">
-        <mock:shadow-root>
-          <div>
-            Hello, World!
-          </div>
-        </mock:shadow-root>
-      </node-health-icon>
+      <symbol-node-health-icon node-url="http://localhost:3000">
+        <img src="/resources/down.png" title="Disconnected" class="symbol-node-health-icon" />
+      </symbol-node-health-icon>
     `);
   });
 });
 
-describe('node-health-icon end-to-end should', () => {
+describe('symbol-node-health-icon end-to-end should', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<node-health-icon></node-health-icon>');
-    const element = await page.find('node-health-icon');
+    await page.setContent('<symbol-node-health-icon></symbol-node-health-icon>');
+    const element = await page.find('symbol-node-health-icon');
     expect(element).toHaveClass('hydrated');
   });
 });

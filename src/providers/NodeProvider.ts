@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-present Grégory Saive for NEM
+ * Copyright 2018 NEM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,4 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './components'
+
+export class NodeProvider {
+  constructor(
+    public readonly url: string
+  ) {}
+
+  async getNodeHealth() {
+    return new Promise((resolve, reject) => {
+      fetch(this.url + '/node/health').then(response => {
+        return response.json().then(json => resolve(json.status))
+      }, (err) => reject(err));
+    })
+  }
+}

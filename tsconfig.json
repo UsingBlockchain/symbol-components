@@ -12,19 +12,17 @@
     ],
     "moduleResolution": "node",
     "module": "esnext",
-    "target": "es2019",
+    "target": "es2017",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "esModuleInterop": true,
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src",
+    "types/jsx.d.ts"
   ],
   "exclude": [
     "node_modules"
