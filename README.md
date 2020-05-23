@@ -1,6 +1,7 @@
 # Symbol Components Library
 
-[![npm version](https://badge.fury.io/js/symbol-components.svg)](https://badge.fury.io/js/symbol-components)
+[![npm][npm]][npm-url]
+[![size][size]][size-url]
 [![Build Status](https://travis-ci.com/symbol/symbol-components.svg?branch=master)](https://travis-ci.com/symbol/symbol-components)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-green.svg)](https://nem2.slack.com/messages/CB0UU89GS//)
 
@@ -83,3 +84,7 @@ Licensed under the [Apache License 2.0](LICENSE)
 [docs]: https://nemtech.github.io
 [issues]: https://github.com/symbol/symbol-components/issues
 [slack]: https://join.slack.com/t/nem2/shared_invite/enQtMzY4MDc2NTg0ODgyLWZmZWRiMjViYTVhZjEzOTA0MzUyMTA1NTA5OWQ0MWUzNTA4NjM5OTJhOGViOTBhNjkxYWVhMWRiZDRkOTE0YmU
+[npm]: https://img.shields.io/npm/v/@symbolui/symbol-components
+[npm-url]: https://www.npmjs.com/package/@symbolui/symbol-components
+[size]: https://packagephobia.now.sh/badge?p=@symbolui/symbol-components
+[size-url]: https://packagephobia.now.sh/result?p=@symbolui/symbol-components
