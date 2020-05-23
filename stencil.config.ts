@@ -43,8 +43,6 @@ export const create: () => Config = () => ({
       'events': ['EventEmitter'],
       'node_modules/buffer/index.js': ['isBuffer'],
       'process': ['nextTick'],
-      'symbol-openapi-typescript-node-client': ['NodeRoutesApi'],
-      './node_modules/request/index.js': ['get']
     }
   },
   nodeResolve: {
@@ -57,6 +55,15 @@ export const create: () => Config = () => ({
     ]
   },
   /// end-region rollup plugins
+
+  /// region testing (complements jest.config.js)
+  testing: {
+    testPathIgnorePatterns: [
+      'node_modules',
+      'storybook'
+    ]
+  },
+  /// end-region testing (complements jest.config.js)
 
   /// region distribution
   globalStyle: 'src/resources/variables.css',

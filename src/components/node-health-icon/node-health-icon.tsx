@@ -17,12 +17,12 @@ import { Component, Prop, h, Host, EventEmitter, Listen, Element, State, Event, 
 
 // internal dependencies
 import { NodeProvider } from '../../providers/NodeProvider'
-import { NodeHealthStatus } from './NodeHealthStatus'
+import { NodeHealthStatus } from '../../models/NodeHealthStatus'
 
 @Component({
   tag: 'symbol-node-health-icon',
   styleUrl: 'node-health-icon.css',
-  shadow: false,
+  shadow: true,
   assetsDirs: ['resources']
 })
 export class NodeHealthIcon {
@@ -50,7 +50,7 @@ export class NodeHealthIcon {
   /**
    * Read node health endpoint
    */
-  componentWillLoad() {
+  componentDidLoad() {
     if (!this.nodeUrl || !this.nodeUrl.length) {
       return
     }
@@ -77,8 +77,8 @@ export class NodeHealthIcon {
   /// end-region event handlers
 
   /// region render methods
-  renderIcon(status: NodeHealthStatus) {
-    if (status && status.apiNode === 'up' && status.db === 'up') {
+  renderIcon() {
+    if (this.status && this.status.apiNode === 'up' && this.status.db === 'up') {
       return <img src={getAssetPath('./resources/up.png')}
                   title="Connected"
                   class="symbol-node-health-icon" />
@@ -94,7 +94,7 @@ export class NodeHealthIcon {
    */
   render() {
     return <Host>
-      {this.renderIcon(this.status)}
+      {this.renderIcon()}
     </Host>;
   }
   /// end-region render methods

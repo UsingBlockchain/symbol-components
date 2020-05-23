@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { NodeHealthStatus, } from "./components/node-health-icon/NodeHealthStatus";
+import { NodeHealthStatus, } from "./models/NodeHealthStatus";
 export namespace Components {
     interface SymbolNodeHealthIcon {
         /**
