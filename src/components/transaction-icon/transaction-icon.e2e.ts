@@ -13,4 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-declare module "*.md";
+import { newSpecPage, newE2EPage } from '@stencil/core/testing';
+import { TransactionIcon } from './transaction-icon';
+
+describe('TransactionIcon component should', () => {
+  it('render and hydrate', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<symbol-transaction-icon></symbol-transaction-icon>');
+    const element = await page.find('symbol-transaction-icon');
+    expect(element).toHaveClass('hydrated');
+  });
+});

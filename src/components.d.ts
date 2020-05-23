@@ -6,12 +6,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { NodeHealthStatus, } from "./models/NodeHealthStatus";
+import { TransactionType, } from "symbol-sdk/dist/src/model/transaction/TransactionType";
 export namespace Components {
     interface SymbolNodeHealthIcon {
         /**
           * The node url (REST gateway)
          */
         "nodeUrl": string;
+    }
+    interface SymbolTransactionIcon {
+        /**
+          * The transaction type
+         */
+        "type": TransactionType | number | string;
     }
 }
 declare global {
@@ -21,8 +28,15 @@ declare global {
         prototype: HTMLSymbolNodeHealthIconElement;
         new (): HTMLSymbolNodeHealthIconElement;
     };
+    interface HTMLSymbolTransactionIconElement extends Components.SymbolTransactionIcon, HTMLStencilElement {
+    }
+    var HTMLSymbolTransactionIconElement: {
+        prototype: HTMLSymbolTransactionIconElement;
+        new (): HTMLSymbolTransactionIconElement;
+    };
     interface HTMLElementTagNameMap {
         "symbol-node-health-icon": HTMLSymbolNodeHealthIconElement;
+        "symbol-transaction-icon": HTMLSymbolTransactionIconElement;
     }
 }
 declare namespace LocalJSX {
@@ -36,8 +50,15 @@ declare namespace LocalJSX {
          */
         "onFetched"?: (event: CustomEvent<NodeHealthStatus>) => void;
     }
+    interface SymbolTransactionIcon {
+        /**
+          * The transaction type
+         */
+        "type"?: TransactionType | number | string;
+    }
     interface IntrinsicElements {
         "symbol-node-health-icon": SymbolNodeHealthIcon;
+        "symbol-transaction-icon": SymbolTransactionIcon;
     }
 }
 export { LocalJSX as JSX };
@@ -45,6 +66,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "symbol-node-health-icon": LocalJSX.SymbolNodeHealthIcon & JSXBase.HTMLAttributes<HTMLSymbolNodeHealthIconElement>;
+            "symbol-transaction-icon": LocalJSX.SymbolTransactionIcon & JSXBase.HTMLAttributes<HTMLSymbolTransactionIconElement>;
         }
     }
 }

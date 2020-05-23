@@ -15,6 +15,7 @@
  */
 import { Config } from '@stencil/core';
 import polyfills from 'rollup-plugin-node-polyfills';
+import image from '@rollup/plugin-image';
 
 export const create: () => Config = () => ({
   /// region packaging
@@ -49,7 +50,14 @@ export const create: () => Config = () => ({
     preferBuiltins: true,
   },
   rollupPlugins: {
-    before: [],
+    before: [
+      image({
+        include: [
+          'src/components/node-health-icon/resources/*.png',
+          'src/components/transaction-icon/resources/*.png'
+        ]
+      })
+    ],
     after: [
       polyfills()
     ]
@@ -58,34 +66,23 @@ export const create: () => Config = () => ({
 
   /// region testing (complements jest.config.js)
   testing: {
-    testPathIgnorePatterns: [
-      'node_modules',
-      'storybook'
-    ]
+    moduleNameMapper: {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    }
   },
   /// end-region testing (complements jest.config.js)
 
   /// region distribution
   globalStyle: 'src/resources/variables.css',
   bundles: [
-    {components: ['symbol-node-health-icon']}
+    {components: ['symbol-node-health-icon']},
+    {components: ['symbol-transaction-icon']}
   ]
   outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader'
-    },
+    { type: 'docs-readme' },
+    { type: 'dist', esmLoaderPath: '../loader' },
     { type: 'dist-lazy', dir: 'dist/lazy' },
-    {
-      type: 'docs-readme'
-    },
-    {
-      type: 'www',
-      serviceWorker: null,
-      copy: [
-        { src: 'resources/icons', dest: 'assets/icons' }
-      ]
-    }
+    { type: 'dist-custom-elements-bundle', dir: 'dist/elements' }
   ]
   /// end-region distribution
 });

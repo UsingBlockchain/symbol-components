@@ -13,14 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { newE2EPage } from '@stencil/core/testing';
+import { newSpecPage } from '@stencil/core/testing';
+import { TransactionIcon } from './transaction-icon';
 
-describe('NodeHealthIcon component should', () => {
-  it('render and hydrate', async () => {
-    const page = await newE2EPage();
+describe('TransactionIcon component should', () => {
+  it('render', async () => {
+    const {root} = await newSpecPage({
+      components: [TransactionIcon],
+      html: '<symbol-transaction-icon></symbol-transaction-icon>'
+    });
 
-    await page.setContent('<symbol-node-health-icon></symbol-node-health-icon>');
-    const element = await page.find('symbol-node-health-icon');
-    expect(element).toHaveClass('hydrated');
+    expect(root).toEqualHtml(`
+      <symbol-transaction-icon>
+        <mock:shadow-root>
+          <img class="symbol-transaction-icon" />
+        </mock:shadow-root>
+      </symbol-transaction-icon>
+    `);
   });
 });

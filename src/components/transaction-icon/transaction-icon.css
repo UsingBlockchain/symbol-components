@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
-module.exports = {
-  preset: "@stencil/core/testing",
+:host {
+  display: block;
+}
+
+.symbol-transaction-icon {
+  height: 32px;
+  width: 32px;
 }

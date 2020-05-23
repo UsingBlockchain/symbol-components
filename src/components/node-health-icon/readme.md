@@ -1,6 +1,6 @@
 # symbol-node-health-icon
 
-The `<symbol-node-health-icon></symbol-node-health-icon>` component is a Symbol component that provides **a network node health status display**.
+The `<symbol-node-health-icon></symbol-node-health-icon>` component is a Symbol component that provides **a network node health status icon**.
 
 ## License
 

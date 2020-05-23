@@ -13,25 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Prop, h, Host, EventEmitter, Listen, Element, State, Event, getAssetPath } from '@stencil/core'
+import { Component, Prop, h, Host, EventEmitter, Listen, Element, State, Event } from '@stencil/core'
 
 // internal dependencies
 import { NodeProvider } from '../../providers/NodeProvider'
 import { NodeHealthStatus } from '../../models/NodeHealthStatus'
 
+// resources
+// @ts-ignore
+import IconUp from './resources/up.png'
+// @ts-ignore
+import IconDown from './resources/down.png'
+
 @Component({
   tag: 'symbol-node-health-icon',
   styleUrl: 'node-health-icon.css',
-  shadow: true,
-  assetsDirs: ['resources']
+  shadow: true
 })
 export class NodeHealthIcon {
   @Element() el: HTMLElement;
 
+  /// region component properties
   /**
    * The node url (REST gateway)
    */
   @Prop() nodeUrl: string
+  /// end-region component properties
 
   /**
    * The node health status
@@ -79,12 +86,12 @@ export class NodeHealthIcon {
   /// region render methods
   renderIcon() {
     if (this.status && this.status.apiNode === 'up' && this.status.db === 'up') {
-      return <img src={getAssetPath('./resources/up.png')}
+      return <img src={IconUp}
                   title="Connected"
                   class="symbol-node-health-icon" />
     }
 
-    return <img src={getAssetPath('./resources/down.png')}
+    return <img src={IconDown}
                 title="Disconnected"
                 class="symbol-node-health-icon" />
   }

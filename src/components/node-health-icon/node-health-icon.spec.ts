@@ -26,7 +26,7 @@ describe('NodeHealthIcon component should', () => {
     expect(root).toEqualHtml(`
       <symbol-node-health-icon>
         <mock:shadow-root>
-          <img src="/resources/down.png" title="Disconnected" class="symbol-node-health-icon" />
+          <img title="Disconnected" class="symbol-node-health-icon" />
         </mock:shadow-root>
       </symbol-node-health-icon>
     `);
