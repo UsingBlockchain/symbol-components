@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [v0.3.0][v0.3.0] - May 2020
+
+- Fixed properties for component `<symbol-transaction-icon>`
+- Improved README for integration
+
 ## [v0.2.0][v0.2.0] - May 2020
 
 - Added component `<symbol-transaction-icon>`

@@ -6,7 +6,6 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { NodeHealthStatus, } from "./models/NodeHealthStatus";
-import { TransactionType, } from "symbol-sdk/dist/src/model/transaction/TransactionType";
 export namespace Components {
     interface SymbolNodeHealthIcon {
         /**
@@ -18,7 +17,7 @@ export namespace Components {
         /**
           * The transaction type
          */
-        "type": TransactionType | number | string;
+        "type": string;
     }
 }
 declare global {
@@ -54,7 +53,7 @@ declare namespace LocalJSX {
         /**
           * The transaction type
          */
-        "type"?: TransactionType | number | string;
+        "type"?: string;
     }
     interface IntrinsicElements {
         "symbol-node-health-icon": SymbolNodeHealthIcon;

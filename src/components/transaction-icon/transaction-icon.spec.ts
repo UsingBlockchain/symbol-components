@@ -31,4 +31,36 @@ describe('TransactionIcon component should', () => {
       </symbol-transaction-icon>
     `);
   });
+
+  it('render correct icon given valid transaction type', async () => {
+    const {rootInstance} = await newSpecPage({
+      components: [TransactionIcon],
+      html: '<symbol-transaction-icon type="aggregate"></symbol-transaction-icon>'
+    });
+
+    const types = Object.keys(rootInstance.getIcons())
+    expect(rootInstance.type).toEqual('aggregate')
+    expect(types).toContain(rootInstance.type)
+    expect(rootInstance.getIcon()).toBeDefined()
+  });
+
+  it('render transfer icon given no transaction type', async () => {
+    const {rootInstance} = await newSpecPage({
+      components: [TransactionIcon],
+      html: '<symbol-transaction-icon></symbol-transaction-icon>'
+    });
+
+    expect(rootInstance.safeType).toEqual('transfer')
+    expect(rootInstance.getIcon()).toBeDefined()
+  });
+
+  it('render transfer icon given invalid transaction type', async () => {
+    const {rootInstance} = await newSpecPage({
+      components: [TransactionIcon],
+      html: '<symbol-transaction-icon type="12345"></symbol-transaction-icon>'
+    });
+
+    expect(rootInstance.safeType).toEqual('transfer')
+    expect(rootInstance.getIcon()).toBeDefined()
+  });
 });

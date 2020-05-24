@@ -13,9 +13,9 @@ Licensed under the [Apache License 2.0](LICENSE)
 
 ## Properties
 
-| Property | Attribute | Description          | Type               | Default     |
-| -------- | --------- | -------------------- | ------------------ | ----------- |
-| `type`   | `type`    | The transaction type | `number \| string` | `undefined` |
+| Property | Attribute | Description          | Type     | Default      |
+| -------- | --------- | -------------------- | -------- | ------------ |
+| `type`   | `type`    | The transaction type | `string` | `'transfer'` |
 
 
 ----------------------------------------------

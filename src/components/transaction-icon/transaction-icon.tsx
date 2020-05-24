@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import { Component, Prop, h, Host } from '@stencil/core'
-import { TransactionType } from 'symbol-sdk/dist/src/model/transaction/TransactionType'
 
 /// region resources
 // @ts-ignore
@@ -48,10 +47,59 @@ import IconTransfer from './resources/tx-transfer.png'
 })
 export class TransactionIcon {
 
+  /// region component properties
   /**
    * The transaction type
    */
-  @Prop() type: TransactionType | number | string
+  @Prop({ mutable: true }) type: string = 'transfer'
+  /// end-region component properties
+
+  /// region public api
+  /**
+   * Read-only property `safeType` makes sure the
+   * returned type is a known icon type
+   */
+  public get safeType() {
+    const type = this.type && this.type.length ? this.type.toLowerCase() : 'transfer'
+    const icons = this.getIcons()
+
+    return Object.keys(icons).includes(type)
+      ? type
+      : 'transfer'
+  }
+  
+  /**
+   * Get collection of known transaction types
+   */
+  public getIcons() {
+    return {
+      'account-link': IconAccountLink,
+      'aggregate': IconAggregate,
+      'lock': IconLock,
+      'metadata': IconMetadata,
+      'mosaic': IconMosaic,
+      'multisig': IconMultisig,
+      'namespace': IconNamespace,
+      'restriction': IconRestriction,
+      'transfer': IconTransfer,
+      'incoming': IconIncoming,
+      'outgoing': IconOutgoing,
+    }
+  }
+
+  /**
+   * Get an icon resource (base64 URI)
+   */
+  public getIcon() {
+    // get known transaction icons
+    const icons: {
+      [k: string]: any
+    } = this.getIcons()
+
+    // make case insensitive
+    return icons[this.safeType]
+  }
+  /// end-region public api
 
   /// region render methods
   /**
@@ -71,57 +119,4 @@ export class TransactionIcon {
     </Host>;
   }
   /// end-region render methods
-
-  /// region private api
-  /**
-   * Get an icon resource (base64 URI)
-   */
-  private getIcon() {
-    const types: {
-      [k: string]: any
-    } = {
-      'account-link': IconAccountLink,
-      'aggregate': IconAggregate,
-      'lock': IconLock,
-      'metadata': IconMetadata,
-      'mosaic': IconMosaic,
-      'multisig': IconMultisig,
-      'namespace': IconNamespace,
-      'restriction': IconRestriction,
-      'incoming': IconIncoming,
-      'outgoing': IconOutgoing
-    }
-
-    if (typeof this.type === 'string') {
-      // make case insensitive
-      const type = this.type.toLowerCase()
-      if (type in types) {
-        return types[type]
-      }
-    }
-
-    switch (this.type) {
-      default:
-      case 'transfer':
-      case TransactionType.TRANSFER: return IconTransfer
-      case TransactionType.ACCOUNT_LINK: return IconAccountLink
-      case 'aggregate':
-      case TransactionType.AGGREGATE_BONDED:
-      case TransactionType.AGGREGATE_COMPLETE: return IconAggregate
-      case TransactionType.HASH_LOCK: return IconLock
-      case TransactionType.ACCOUNT_METADATA:
-      case TransactionType.MOSAIC_METADATA:
-      case TransactionType.NAMESPACE_METADATA: return IconMetadata
-      case TransactionType.MOSAIC_DEFINITION:
-      case TransactionType.MOSAIC_SUPPLY_CHANGE: return IconMosaic
-      case TransactionType.MULTISIG_ACCOUNT_MODIFICATION: return IconMultisig
-      case TransactionType.NAMESPACE_REGISTRATION: return IconNamespace
-      case TransactionType.ACCOUNT_ADDRESS_RESTRICTION:
-      case TransactionType.ACCOUNT_MOSAIC_RESTRICTION:
-      case TransactionType.ACCOUNT_OPERATION_RESTRICTION:
-      case TransactionType.MOSAIC_ADDRESS_RESTRICTION:
-      case TransactionType.MOSAIC_GLOBAL_RESTRICTION: return IconRestriction
-    }
-  }
-  /// end-region private api
 }
