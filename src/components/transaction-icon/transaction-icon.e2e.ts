@@ -18,7 +18,7 @@ import { TransactionIcon } from './transaction-icon';
 
 describe('TransactionIcon component should', () => {
   it('render and hydrate', async () => {
-    const page = await newE2EPage();
+    const page = await newE2EPage({});
 
     await page.setContent('<symbol-transaction-icon></symbol-transaction-icon>');
     const element = await page.find('symbol-transaction-icon');

@@ -4,7 +4,7 @@
 [![size-badge][size-badge]][npm-url]
 [![dl-badge][dl-badge]][npm-url]
 [![Build Status](https://travis-ci.com/symbol/symbol-components.svg?branch=master)](https://travis-ci.com/symbol/symbol-components)
-[![Slack](https://img.shields.io/badge/chat-on%20slack-green.svg)](https://nem2.slack.com/messages/CB0UU89GS//)
+[![Slack](https://img.shields.io/badge/chat-on%20slack-green.svg)](https://nem2.slack.com/messages/CB0UU89GS)
 
 Library to provide Javascript Components for Symbol.
 

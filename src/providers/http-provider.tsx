@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import '@stencil/state-tunnel';
 
-// auto generated components types definition
-export { Components } from './components'
+import { h } from '@stencil/core';
+import { createProviderConsumer } from "@stencil/state-tunnel";
 
-// utilities
-export * from './models'
-export * from './providers'
+export interface HttpClientState {
+  nodeUrl: string;
+}
+
+export const HttpProviderConsumer = createProviderConsumer<HttpClientState>({
+  nodeUrl: undefined,
+}, (subscribe, child) => <context-consumer subscribe={subscribe} renderer={child}/>);

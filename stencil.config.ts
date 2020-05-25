@@ -66,8 +66,10 @@ export const create: () => Config = () => ({
 
   /// region testing (complements jest.config.js)
   testing: {
+    automock: false,
     moduleNameMapper: {
-      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
+      "\\.(css|less)$": "identity-obj-proxy"
     }
   },
   /// end-region testing (complements jest.config.js)
@@ -75,9 +77,11 @@ export const create: () => Config = () => ({
   /// region distribution
   globalStyle: 'src/resources/variables.css',
   bundles: [
+    {components: ['symbol-storybook-introduction']},
     {components: ['symbol-node-health-icon']},
-    {components: ['symbol-transaction-icon']}
-  ]
+    {components: ['symbol-transaction-icon']},
+    {components: ['symbol-signatures-progressbar']}
+  ],
   outputTargets: [
     { type: 'docs-readme' },
     { type: 'dist', esmLoaderPath: '../loader' },

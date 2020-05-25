@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import '@stencil/state-tunnel';
 
-// auto generated components types definition
-export { Components } from './components'
-
-// utilities
-export * from './models'
-export * from './providers'
+export interface NodeHealthStatus {
+  apiNode: string,
+  db: string;
+}

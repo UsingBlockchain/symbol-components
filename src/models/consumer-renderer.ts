@@ -13,11 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import '@stencil/state-tunnel';
+import { JSX } from "@stencil/core";
 
-// auto generated components types definition
-export { Components } from './components'
-
-// utilities
-export * from './models'
-export * from './providers'
+export type ConsumerRenderer = (nodeUrl: string) => JSX.Element | JSX.Element[] | undefined | null;

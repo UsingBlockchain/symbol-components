@@ -16,8 +16,8 @@
 import { Component, Prop, h, Host, EventEmitter, Listen, Element, State, Event } from '@stencil/core'
 
 // internal dependencies
-import { NodeProvider } from '../../providers/NodeProvider'
-import { NodeHealthStatus } from '../../models/NodeHealthStatus'
+import { NodeProvider } from '../../providers'
+import { NodeHealthStatus } from '../../models'
 
 // resources
 // @ts-ignore

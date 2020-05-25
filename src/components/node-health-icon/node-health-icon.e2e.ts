@@ -18,7 +18,6 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('NodeHealthIcon component should', () => {
   it('render and hydrate', async () => {
     const page = await newE2EPage();
-
     await page.setContent('<symbol-node-health-icon></symbol-node-health-icon>');
     const element = await page.find('symbol-node-health-icon');
     expect(element).toHaveClass('hydrated');

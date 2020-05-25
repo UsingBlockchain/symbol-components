@@ -5,13 +5,43 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { NodeHealthStatus, } from "./models/NodeHealthStatus";
+import { ConsumerRenderer, NodeHealthStatus, } from "./models";
+import { Transaction, } from "symbol-sdk/dist/src/model/transaction/Transaction";
+import { MultisigAccountGraphInfo, } from "symbol-sdk/dist/src/model/account/MultisigAccountGraphInfo";
 export namespace Components {
+    interface SymbolHttpConsumer {
+        /**
+          * The network node URL
+         */
+        "nodeUrl": string;
+        /**
+          * Consumer renderer
+         */
+        "renderer": ConsumerRenderer;
+    }
+    interface SymbolHttpProvider {
+        /**
+          * The network node URL
+         */
+        "nodeUrl": string;
+    }
     interface SymbolNodeHealthIcon {
         /**
           * The node url (REST gateway)
          */
         "nodeUrl": string;
+    }
+    interface SymbolSignaturesProgressbar {
+        /**
+          * The multisig account graph info
+         */
+        "graph"?: MultisigAccountGraphInfo;
+        /**
+          * The transaction for which signatures have to be expected
+         */
+        "transaction": Transaction;
+    }
+    interface SymbolStorybookIntroduction {
     }
     interface SymbolTransactionIcon {
         /**
@@ -21,11 +51,35 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLSymbolHttpConsumerElement extends Components.SymbolHttpConsumer, HTMLStencilElement {
+    }
+    var HTMLSymbolHttpConsumerElement: {
+        prototype: HTMLSymbolHttpConsumerElement;
+        new (): HTMLSymbolHttpConsumerElement;
+    };
+    interface HTMLSymbolHttpProviderElement extends Components.SymbolHttpProvider, HTMLStencilElement {
+    }
+    var HTMLSymbolHttpProviderElement: {
+        prototype: HTMLSymbolHttpProviderElement;
+        new (): HTMLSymbolHttpProviderElement;
+    };
     interface HTMLSymbolNodeHealthIconElement extends Components.SymbolNodeHealthIcon, HTMLStencilElement {
     }
     var HTMLSymbolNodeHealthIconElement: {
         prototype: HTMLSymbolNodeHealthIconElement;
         new (): HTMLSymbolNodeHealthIconElement;
+    };
+    interface HTMLSymbolSignaturesProgressbarElement extends Components.SymbolSignaturesProgressbar, HTMLStencilElement {
+    }
+    var HTMLSymbolSignaturesProgressbarElement: {
+        prototype: HTMLSymbolSignaturesProgressbarElement;
+        new (): HTMLSymbolSignaturesProgressbarElement;
+    };
+    interface HTMLSymbolStorybookIntroductionElement extends Components.SymbolStorybookIntroduction, HTMLStencilElement {
+    }
+    var HTMLSymbolStorybookIntroductionElement: {
+        prototype: HTMLSymbolStorybookIntroductionElement;
+        new (): HTMLSymbolStorybookIntroductionElement;
     };
     interface HTMLSymbolTransactionIconElement extends Components.SymbolTransactionIcon, HTMLStencilElement {
     }
@@ -34,11 +88,31 @@ declare global {
         new (): HTMLSymbolTransactionIconElement;
     };
     interface HTMLElementTagNameMap {
+        "symbol-http-consumer": HTMLSymbolHttpConsumerElement;
+        "symbol-http-provider": HTMLSymbolHttpProviderElement;
         "symbol-node-health-icon": HTMLSymbolNodeHealthIconElement;
+        "symbol-signatures-progressbar": HTMLSymbolSignaturesProgressbarElement;
+        "symbol-storybook-introduction": HTMLSymbolStorybookIntroductionElement;
         "symbol-transaction-icon": HTMLSymbolTransactionIconElement;
     }
 }
 declare namespace LocalJSX {
+    interface SymbolHttpConsumer {
+        /**
+          * The network node URL
+         */
+        "nodeUrl"?: string;
+        /**
+          * Consumer renderer
+         */
+        "renderer"?: ConsumerRenderer;
+    }
+    interface SymbolHttpProvider {
+        /**
+          * The network node URL
+         */
+        "nodeUrl"?: string;
+    }
     interface SymbolNodeHealthIcon {
         /**
           * The node url (REST gateway)
@@ -49,6 +123,22 @@ declare namespace LocalJSX {
          */
         "onFetched"?: (event: CustomEvent<NodeHealthStatus>) => void;
     }
+    interface SymbolSignaturesProgressbar {
+        /**
+          * The multisig account graph info
+         */
+        "graph"?: MultisigAccountGraphInfo;
+        /**
+          * Emits an error
+         */
+        "onError"?: (event: CustomEvent<string>) => void;
+        /**
+          * The transaction for which signatures have to be expected
+         */
+        "transaction": Transaction;
+    }
+    interface SymbolStorybookIntroduction {
+    }
     interface SymbolTransactionIcon {
         /**
           * The transaction type
@@ -56,7 +146,11 @@ declare namespace LocalJSX {
         "type"?: string;
     }
     interface IntrinsicElements {
+        "symbol-http-consumer": SymbolHttpConsumer;
+        "symbol-http-provider": SymbolHttpProvider;
         "symbol-node-health-icon": SymbolNodeHealthIcon;
+        "symbol-signatures-progressbar": SymbolSignaturesProgressbar;
+        "symbol-storybook-introduction": SymbolStorybookIntroduction;
         "symbol-transaction-icon": SymbolTransactionIcon;
     }
 }
@@ -64,7 +158,11 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "symbol-http-consumer": LocalJSX.SymbolHttpConsumer & JSXBase.HTMLAttributes<HTMLSymbolHttpConsumerElement>;
+            "symbol-http-provider": LocalJSX.SymbolHttpProvider & JSXBase.HTMLAttributes<HTMLSymbolHttpProviderElement>;
             "symbol-node-health-icon": LocalJSX.SymbolNodeHealthIcon & JSXBase.HTMLAttributes<HTMLSymbolNodeHealthIconElement>;
+            "symbol-signatures-progressbar": LocalJSX.SymbolSignaturesProgressbar & JSXBase.HTMLAttributes<HTMLSymbolSignaturesProgressbarElement>;
+            "symbol-storybook-introduction": LocalJSX.SymbolStorybookIntroduction & JSXBase.HTMLAttributes<HTMLSymbolStorybookIntroductionElement>;
             "symbol-transaction-icon": LocalJSX.SymbolTransactionIcon & JSXBase.HTMLAttributes<HTMLSymbolTransactionIconElement>;
         }
     }

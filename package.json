@@ -18,10 +18,11 @@
   "scripts": {
     "build": "stencil build --docs",
     "watch": "stencil build --docs --watch",
-    "pretest": "npm run build",
+    "pretest": "npm run build && npm run bundle:css",
     "test": "stencil test --spec",
-    "test:e2e": "stencil test --e2e",
-    "test:watch": "stencil test --spec --e2e --watchAll"
+    "test:e2e": "npm run pretest && stencil test --e2e",
+    "test:watch": "stencil test --spec --e2e --watchAll",
+    "bundle:css": "cp dist/symbol-components/symbol-components.css dist/lazy/"
   },
   "stencil": {
     "protocol": "http",
@@ -30,6 +31,7 @@
     "buildDir": "build"
   },
   "dependencies": {
+    "@stencil/state-tunnel": "^1.0.1",
     "@webcomponents/webcomponentsjs": "2.4.3",
     "symbol-sdk": "0.18.0"
   },
@@ -39,12 +41,14 @@
     "@types/jest": "^25.2.3",
     "@types/node": "^12.12.28",
     "@types/node-fetch": "2.5.7",
+    "@types/puppeteer": "2.0.1",
+    "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
+    "puppeteer": "2.1.1",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-node-resolve": "5.2.0",
-    "typescript": "^3.8.3",
-    "identity-obj-proxy": "3.0.0"
+    "typescript": "^3.8.3"
   },
   "license": "Apache-2.0",
   "repository": {
