@@ -4,6 +4,9 @@
 
 - Fixed properties for component `<symbol-transaction-icon>`
 - Improved README for integration
+- Added component `<symbol-signatures-progressbar>`
+- Fixed end-to-end tests using `npm run test:e2e`
+- Added `symbol-components.css` to built bundles
 
 ## [v0.2.0][v0.2.0] - May 2020
 
@@ -18,5 +21,7 @@
 - Added component `<symbol-node-health-icon>`
 - Added configuration for StencilJS webcomponents compiler
 
+[v0.1.0]: https://github.com/symbol/symbol-components/releases/tag/v0.3.1
+[v0.3.0]: https://github.com/symbol/symbol-components/releases/tag/v0.3.0
 [v0.2.0]: https://github.com/symbol/symbol-components/releases/tag/v0.2.0
 [v0.1.0]: https://github.com/symbol/symbol-components/releases/tag/v0.1.0
