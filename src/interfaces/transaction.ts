@@ -14,13 +14,44 @@
  * limitations under the License.
  */
 
-import { h } from '@stencil/core';
-import { createProviderConsumer } from "@stencil/state-tunnel";
+export interface ITransaction {
+  /**
+   * The transaction type
+   */
+  type: number;
 
-export interface HttpClientState {
-  nodeUrl: string;
+  /**
+   * The network type
+   */
+  networkType: number;
+
+  /**
+   * The transaction type version
+   */
+  version: number;
+
+  /**
+   * The transaction deadline
+   */
+  deadline: number;
+
+  /**
+   * The maxFee
+   */
+  maxFee: number;
+
+  /**
+   * (Optional) The transaction signature
+   */
+  signature?: string;
+
+  /**
+   * (Optional) The transaction signer public key
+   */
+  signer?: string;
+
+  /**
+   * (Optional) The transaction information
+   */
+  transactionInfo?: any
 }
-
-export const HttpProviderConsumer = createProviderConsumer<HttpClientState>({
-  nodeUrl: undefined,
-}, (subscribe, child) => <context-consumer subscribe={subscribe} renderer={child}/>);

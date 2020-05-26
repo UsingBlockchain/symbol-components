@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 // export providers
-export * from './http-provider'
 export * from './node-provider'

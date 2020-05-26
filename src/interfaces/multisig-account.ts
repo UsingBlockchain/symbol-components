@@ -13,7 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { IPublicAccount } from './public-account'
 
-// export models
-export * from './consumer-renderer'
-export * from './node-health-status'
+export interface IMultisigAccount {
+  /**
+   * The public key
+   */
+  account: IPublicAccount
+
+  /**
+   * The number of minimum approval cosignatories
+   */
+  minApproval: number
+
+  /**
+   * The number of minimum removal cosignatories
+   */
+  minRemoval: number
+
+  /**
+   * The cosignatories
+   */
+  cosignatories: IPublicAccount[]
+
+  /**
+   * The multi-signature accounts
+   */
+  multisigAccounts: IPublicAccount[]
+}

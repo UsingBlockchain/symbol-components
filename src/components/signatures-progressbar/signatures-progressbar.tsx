@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 import { Component, Prop, h, Host, Element, Event, EventEmitter } from '@stencil/core'
-import { AggregateTransaction } from 'symbol-sdk/dist/src/model/transaction/AggregateTransaction'
-import { Transaction } from 'symbol-sdk/dist/src/model/transaction/Transaction'
-import { TransactionType } from 'symbol-sdk/dist/src/model/transaction/TransactionType'
-import { MultisigAccountGraphInfo } from 'symbol-sdk/dist/src/model/account/MultisigAccountGraphInfo'
-import { MultisigAccountInfo } from 'symbol-sdk/dist/src/model/account/MultisigAccountInfo'
+
+// internal dependencies
+import { 
+  IAggregateTransaction,
+  ITransaction,
+  IMultisigGraph,
+  IMultisigAccount,
+  TransactionType,
+} from '../../interfaces'
 
 @Component({
   tag: 'symbol-signatures-progressbar',
@@ -35,12 +39,12 @@ export class SignaturesProgressBar {
   /**
    * The transaction for which signatures have to be expected
    */
-  @Prop() transaction!: Transaction
+  @Prop() transaction: ITransaction
 
   /**
    * The multisig account graph info
    */
-  @Prop() graph?: MultisigAccountGraphInfo
+  @Prop() graph?: IMultisigGraph
   /// end-region component properties
 
   /**
@@ -71,7 +75,7 @@ export class SignaturesProgressBar {
     // flatten output and return length
     return infos.reduce((
       {}, // `prev` ignored
-      it: MultisigAccountInfo[]) => [...it]
+      it: IMultisigAccount[]) => [...it]
     )
     .map(m => m.cosignatories.map(c => c.address))
     .reduce((prev, it) => prev.concat(it))
@@ -101,7 +105,7 @@ export class SignaturesProgressBar {
       TransactionType.AGGREGATE_BONDED,
       TransactionType.AGGREGATE_COMPLETE,
     ].includes(this.transaction.type)) {
-      cntSigs += (this.transaction as AggregateTransaction).cosignatures.length
+      cntSigs += (this.transaction as IAggregateTransaction).cosignatures.length
     }
 
     // calculate progress bar percentage

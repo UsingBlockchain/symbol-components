@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import '@stencil/state-tunnel';
+export interface IPublicAccount {
+  /**
+   * The address
+   */
+  address: string
 
-// auto generated components types definition
-export { Components } from './components'
-
-// utilities
-export * from './interfaces'
-export * from './providers'
+  /**
+   * The public key
+   */
+  publicKey: string
+}

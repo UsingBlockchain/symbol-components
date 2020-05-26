@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { JSX } from "@stencil/core";
+import { IMultisigAccount } from './multisig-account'
 
-export type ConsumerRenderer = (nodeUrl: string) => JSX.Element | JSX.Element[] | undefined | null;
+export interface IMultisigGraph {
+  /**
+   * The multisig account informations
+   */
+  multisigAccounts: Map<number, IMultisigAccount[]>
+}
